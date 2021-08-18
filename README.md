@@ -1,8 +1,8 @@
 ## showing different charts with javascript rich chart libraries with django
 ```### Highcharts
-### Toast UI Chart
-### Chart.js
-### V-charts
-### D3.js
+1. Toast UI Chart
+2. Chart.js
+3. V-charts
+4. D3.js
 ```
 
