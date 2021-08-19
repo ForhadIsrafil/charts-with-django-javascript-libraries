@@ -1,3 +1,24 @@
 from django.shortcuts import render
+import json, os
+from django.contrib.staticfiles import finders  # Given a relative file path, find an absolute file path.
+import pandas as pd
+from django.contrib.admin.views.decorators import staff_member_required
+from django.db.models import Count, F, Sum, Avg
+from django.db.models.functions import ExtractYear, ExtractMonth
+from django.http import JsonResponse
+from .models import *
 
-# Create your views here.
+csv_path = os.path.join(os.path.dirname(__file__), 'data.csv')
+
+
+def bar_chart(request):
+    '''x='Year', y='Completion', text='Completion'''
+    get_csv_data = pd.read_csv(csv_path, )
+    bar_group = get_csv_data.groupby('Year', as_index=False).sum()
+    print(bar_group.head())
+    context = {
+        'years': bar_group.Year.astype(int).to_list(),
+        'completion': bar_group.Completion.astype(int).to_list(),
+        'gas_production': bar_group.GasProd.astype(int).to_list(),
+    }
+    return render(request, 'chartjs_templates/bar_chart.html', context)
