@@ -3,7 +3,7 @@
     {% load static i18n %}
     <head>
         <meta charset="UTF-8">
-        <title>Bar Chart</title>
+        <title>Line Chart</title>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
         <script type="text/javascript" src="{% static 'utils.js' %}"></script>
     </head>
@@ -15,7 +15,7 @@
     <script>
         var ctx = document.getElementById('bar_chart').getContext('2d');
         var bar_chart = new Chart(ctx, {
-            type: 'bar',
+            type: 'line',
             data: {
                 {#labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],#}
                 labels: {{ years }},
@@ -42,9 +42,7 @@
                         'rgba(153, 102, 255, 1)',
                         'rgba(255, 159, 64, 1)'
                     ],
-                    borderWidth: 1,
-                    borderRadius: 8,
-                    borderSkipped: false,
+                    fill: true,
                 },
                     {
                         label: 'Gas',
@@ -67,22 +65,38 @@
                             'rgba(103, 102, 255, 1)',
                             'rgba(205, 159, 64, 1)'
                         ],
-                        borderWidth: 1,
-                        borderRadius: 8,
-                        borderSkipped: false,
+                        fill: false,
+                        borderDash: [2, 3],
                     },]
             },
             options: {
                 // make the bar chart as horizontal by indexAxis
                 indexAxis: 'y',
                 responsive: true,
-                interaction: {intersect: false}, // for Stacked Bar Chart with Groups
-                plugins: {legend: {position: 'top'}, title: {display: true, text: 'Wels Completion'},},
+                interaction: {mode: 'index', intersect: false}, // for Stacked Bar Chart with Groups
+                plugins: {
+                    legend: {position: 'top'}, title: {display: true, text: 'Wels Completion'}, subtitle: {
+                        display: true,
+                        text: 'Line chart Subtitle',
+                        color: '#f16564',
+                        font: {
+                            size: 12,
+                            family: 'tahoma',
+                            weight: 'normal',
+                            style: 'Comic'
+                        },
+                        padding: {
+                            bottom: 10
+                        }
+                    }
+                },
                 scales: {
                     y: {
-                        stacked: true,
+                        {#type: 'linear',#}
+                        stacked: false,
                         beginAtZero: true,
                         display: true,
+                        position: 'left',
                         title: {
                             display: true,
                             text: 'Year',
@@ -95,9 +109,15 @@
                             },
                             padding: {top: 10, left: 0, right: 0, bottom: 10}
                         }
+
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: false,
+                        position: 'right',
                     },
                     x: {
-                        stacked: true,
+                        stacked: false,
                         beginAtZero: true,
                         display: true,
                         title: {
