@@ -3,7 +3,7 @@
     <!DOCTYPE html>
     <html lang="en">
     <head>
-        {#    <meta charset="UTF-8">#}
+        <meta charset="UTF-8">
         <title>Bar Chart</title>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     </head>
@@ -24,56 +24,68 @@
                     {#data: [12, 19, 3, 5, 2, 3],#}
                     data: {{ completion }},
                     backgroundColor: [
+                        'rgba(255, 159, 64, 0.2)',
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
                         'rgba(255, 206, 86, 0.2)',
                         'rgba(75, 192, 192, 0.2)',
                         'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
+                        {#'#75a240',#}
+
                     ],
                     borderColor: [
+                        'rgba(75, 192, 192, 1)',
                         'rgba(255, 99, 132, 1)',
+                        '#f77794',
                         'rgba(54, 162, 235, 1)',
                         'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
                         'rgba(153, 102, 255, 1)',
                         'rgba(255, 159, 64, 1)'
                     ],
-                    borderWidth: 1
+                    borderWidth: 1,
+                    borderRadius: 8,
+                    borderSkipped: false,
                 },
                     {
                         label: 'Gas',
                         {#data: [12, 19, 3, 5, 2, 3],#}
                         data: {{ gas_production }},
+                        // we can also use hash color without rgba color
                         backgroundColor: [
-                            {#'rgba(205, 99, 132, 0.2)',#}
-                            {#'rgba(50, 162, 235, 0.2)',#}
-                            {#'rgba(205, 206, 86, 0.2)',#}
+                            'rgba(205, 99, 132, 0.2)',
+                            'rgba(50, 162, 235, 0.2)',
+                            'rgba(205, 206, 86, 0.2)',
                             'rgba(70, 192, 192, 0.2)',
                             'rgba(103, 102, 255, 0.2)',
                             'rgba(205, 159, 64, 0.2)'
                         ],
                         borderColor: [
-                            {#'rgba(205, 99, 132, 1)',#}
-                            {#'rgba(50, 162, 235, 1)',#}
-                            {#'rgba(205, 206, 86, 1)',#}
+                            'rgba(205, 99, 132, 1)',
+                            'rgba(50, 162, 235, 1)',
+                            'rgba(205, 206, 86, 1)',
                             'rgba(70, 192, 192, 1)',
                             'rgba(103, 102, 255, 1)',
                             'rgba(205, 159, 64, 1)'
                         ],
                         borderWidth: 1,
+                        borderRadius: 8,
+                        borderSkipped: false,
                     },]
             },
             options: {
+                // make the bar chart as horizontal by indexAxis
+                indexAxis: 'y',
                 responsive: true,
+                interaction: {intersect: false}, // for Stacked Bar Chart with Groups
                 plugins: {legend: {position: 'top'}, title: {display: true, text: 'Wels Completion'},},
                 scales: {
                     y: {
+                        stacked: true,
                         beginAtZero: true,
                         display: true,
                         title: {
                             display: true,
-                            text: 'Values',
+                            text: 'Year',
                             color: 'rgba(255, 99, 132, 1)',
                             font: {
                                 family: 'Comic Sans MS',
@@ -85,11 +97,12 @@
                         }
                     },
                     x: {
+                        stacked: true,
                         beginAtZero: true,
                         display: true,
                         title: {
                             display: true,
-                            text: 'Year',
+                            text: 'Values',
                             color: '#558',
                             font: {
                                 family: 'Comic Sans MS',
