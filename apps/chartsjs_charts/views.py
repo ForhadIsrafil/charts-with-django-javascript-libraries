@@ -15,11 +15,14 @@ def bar_chart(request):
     '''x='Year', y='Completion', text='Completion'''
     get_csv_data = pd.read_csv(csv_path, )
     bar_group = get_csv_data.groupby('Year', as_index=False).sum()
-    print(bar_group.head())
+    bar_group = bar_group.drop('Unnamed: 16', axis=1)
+    print(json.loads(bar_group.head().to_json(orient='records')))
+    data = bar_group.head().to_json(orient='records')
     context = {
         'years': bar_group.Year.astype(int).to_list(),
         'completion': bar_group.Completion.astype(int).to_list(),
         'gas_production': bar_group.GasProd.astype(int).to_list(),
+        'data': data,
     }
     return render(request, 'chartjs_templates/bar_chart.html', context)
 

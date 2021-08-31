@@ -10,10 +10,42 @@
     <body>
     <div>
         <canvas id="bar_chart" class="h-25 w-25"></canvas>
+        <canvas id="bar_chart2" class="h-25 w-25"></canvas>
     </div>
     </body>
     <script>
         var ctx = document.getElementById('bar_chart').getContext('2d');
+        var ctx2 = document.getElementById('bar_chart2').getContext('2d');
+        const data = [{x: 'Jan', net: 100, cogs: 50, gm: 50}, {x: 'Feb', net: 120, cogs: 55, gm: 75}];
+        console.log(typeof data);
+        const cfg = {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb'],
+                datasets: [{
+                    label: 'Net sales',
+                    data: data,
+                    parsing: {
+                        yAxisKey: 'net'
+                    }
+                }, {
+                    label: 'Cost of goods sold',
+                    data: data,
+                    parsing: {
+                        yAxisKey: 'cogs'
+                    }
+                }, {
+                    label: 'Gross margin',
+                    data: data,
+                    parsing: {
+                        yAxisKey: 'gm'
+                    }
+                }]
+            },
+        };
+        var bar_ = new Chart(ctx2,
+            cfg
+        )
         var bar_chart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -41,6 +73,9 @@
                         'rgba(255, 206, 86, 1)',
                         'rgba(153, 102, 255, 1)',
                         'rgba(255, 159, 64, 1)'
+                    ],
+                    hoverBackgroundColor: [
+                        'rgba(255, 99, 132, 1)',
                     ],
                     borderWidth: 1,
                     borderRadius: 8,
