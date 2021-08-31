@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static i18n %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Radar Chart</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+        <script type="text/javascript" src="{% static 'utils.js' %}"></script>
+    </head>
+    <body>
+    <div>
+        <canvas id="radar_chart" class="h-25 w-25"></canvas>
+    </div>
+    </body>
+    <script>
+        var ctx = document.getElementById('radar_chart').getContext('2d');
+        var bar_chart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                {#labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],#}
+                labels: {{ years }},
+                datasets: [{
+                    label: 'Completion',
+                    {#data: [12, 19, 3, 5, 2, 3],#}
+                    data: {{ completion }},
+                    backgroundColor: [
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        {#'#75a240',#}
+
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        '#f77794',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    hoverBackgroundColor: [
+                        'rgba(255, 99, 132, 1)',
+                    ],
+                    borderWidth: 1,
+                    radius: 10,
+                    fill: true
+                },
+                    {
+                        label: 'Gas',
+                        {#data: [12, 19, 3, 5, 2, 3],#}
+                        data: {{ gas_production }},
+                        // we can also use hash color without rgba color
+                        backgroundColor: [
+                            'rgba(205, 99, 132, 0.2)',
+                            'rgba(50, 162, 235, 0.2)',
+                            'rgba(205, 206, 86, 0.2)',
+                            'rgba(70, 192, 192, 0.2)',
+                            'rgba(103, 102, 255, 0.2)',
+                            'rgba(205, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(205, 99, 132, 1)',
+                            'rgba(50, 162, 235, 1)',
+                            'rgba(205, 206, 86, 1)',
+                            'rgba(70, 192, 192, 1)',
+                            'rgba(103, 102, 255, 1)',
+                            'rgba(205, 159, 64, 1)'
+                        ],
+                        borderWidth: 1,
+                        radius: 10,
+                        fill: true
+                    },]
+            },
+            options: {
+                responsive: true,
+                plugins: {legend: {position: 'top'}, title: {display: true, text: 'Wels Completion(Bubble chart)'},},
+
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                }
+            }
+        });
+    </script>
+{% endblock %}
