@@ -26,6 +26,7 @@ def bar_chart(request):
     }
     return render(request, 'chartjs_templates/bar_chart.html', context)
 
+
 def line_chart(request):
     get_csv_data = pd.read_csv(csv_path, )
     bar_group = get_csv_data.groupby('Year', as_index=False).sum()
@@ -36,6 +37,7 @@ def line_chart(request):
         'gas_production': bar_group.GasProd.astype(int).to_list(),
     }
     return render(request, 'chartjs_templates/line_chart.html', context)
+
 
 def bubble_chart(request):
     get_csv_data = pd.read_csv(csv_path, )
@@ -48,6 +50,7 @@ def bubble_chart(request):
     }
     return render(request, 'chartjs_templates/bubble_chart.html', context)
 
+
 def radar_chart(request):
     get_csv_data = pd.read_csv(csv_path, )
     bar_group = get_csv_data.groupby('Year', as_index=False).sum()
@@ -59,3 +62,26 @@ def radar_chart(request):
     }
     return render(request, 'chartjs_templates/radar_chart.html', context)
 
+
+def pie_doughnut_chart(request):
+    get_csv_data = pd.read_csv(csv_path, )
+    bar_group = get_csv_data.groupby('Year', as_index=False).sum()
+
+    context = {
+        'years': bar_group.Year.astype(int).to_list(),
+        'completion': bar_group.Completion.astype(int).to_list(),
+        'gas_production': bar_group.GasProd.astype(int).to_list(),
+    }
+    return render(request, 'chartjs_templates/pie_doughnut_chart.html', context)
+
+
+def polar_area_chart(request):
+    get_csv_data = pd.read_csv(csv_path, )
+    bar_group = get_csv_data.groupby('Year', as_index=False).sum()
+
+    context = {
+        'years': bar_group.Year.astype(int).to_list(),
+        'completion': bar_group.Completion.astype(int).to_list(),
+        'gas_production': bar_group.GasProd.astype(int).to_list(),
+    }
+    return render(request, 'chartjs_templates/polar_area_chart.html', context)

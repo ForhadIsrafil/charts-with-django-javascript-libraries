@@ -3,19 +3,19 @@
     {% load static i18n %}
     <head>
         <meta charset="UTF-8">
-        <title>Radar Chart</title>
+        <title>Polar Area Chart</title>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
         <script type="text/javascript" src="{% static 'utils.js' %}"></script>
     </head>
     <body>
     <div>
-        <canvas id="radar_chart" class="h-25 w-25"></canvas>
+        <canvas id="polar_area_chart" class="h-25 w-25"></canvas>
     </div>
     </body>
     <script>
-        var ctx = document.getElementById('radar_chart').getContext('2d');
-        var bar_chart = new Chart(ctx, {
-            type: 'radar',
+        var ctx = document.getElementById('polar_area_chart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'polarArea',
             data: {
                 {#labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],#}
                 labels: {{ years }},
@@ -72,14 +72,8 @@
                     },]
             },
             options: {
-                {#responsive: true,#}
-                {#plugins: {legend: {position: 'top'}, title: {display: true, text: 'Wels Completion(Bubble chart)'},},#}
-
-                elements: {
-                    line: {
-                        borderWidth: 3
-                    }
-                }
+                responsive: true,
+                plugins: {legend: {position: 'top'}, title: {display: true, text: 'Wels Completion(polarArea chart)'},},
             }
         });
     </script>
