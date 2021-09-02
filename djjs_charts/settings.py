@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'apps.chartsjs_charts',
     'apps.highcharts',
     'apps.tui_charts',
-    'apps.v_charts',
 ]
 
 MIDDLEWARE = [

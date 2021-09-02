@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static i18n %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Bubble Chart</title>
+        <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css"/>
+        <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
+        <script type="text/javascript" src="{% static 'utils.js' %}"></script>
+    </head>
+    <body>
+    <div id="chart"></div>
+    </body>
+    <script>
+        /* namespace */
+        const Chart = toastui.Chart;
+        const el = document.getElementById('chart');
+        const data = {
+            series: [
+                {
+                    name: 'Africa',
+                    data: [
+                        {x: 30, y: 100, r: 10, label: 'Morocco'},
+                        {x: 40, y: 200, r: 30, label: 'Egypt'},
+                    ],
+                    visible: false,
+                },
+                {
+                    name: 'America',
+                    data: [
+                        {x: 60, y: 40, r: 50, label: 'Canada'},
+                        {x: 50, y: 300, r: 10, label: 'United States'},
+                    ],
+                },
+                {
+                    name: 'Asia',
+                    data: [
+                        {x: 10, y: 150, r: 20, label: 'Korea, South'},
+                        {x: 20, y: 200, r: 30, label: 'Singapore'},
+                    ],
+                },
+            ],
+        };
+
+        const options = {
+            chart: {width: 700, height: 400},
+            circleLegend: {
+                visible: false,
+            },
+        };
+
+        const chart = Chart.bubbleChart({el, data, options});
+        {#const chart = new bubbleChart({el, data, options}); // Second way#}
+    </script>
+{% endblock %}

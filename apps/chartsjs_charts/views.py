@@ -60,7 +60,7 @@ def radar_chart(request):
         'completion': bar_group.Completion.astype(int).to_list(),
         'gas_production': bar_group.GasProd.astype(int).to_list(),
     }
-    return render(request, 'chartjs_templates/radar_chart.html', context)
+    return render(request, 'chartjs_templates/bubble_chart.html', context)
 
 
 def pie_doughnut_chart(request):

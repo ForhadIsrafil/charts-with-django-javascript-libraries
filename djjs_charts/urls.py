@@ -23,7 +23,6 @@ urlpatterns = [
     path('', include('apps.chartsjs_charts.urls')),
     path('', include('apps.highcharts.urls')),
     path('', include('apps.tui_charts.urls')),
-    path('', include('apps.v_charts.urls')),
 ]
 
 if settings.DEBUG:
