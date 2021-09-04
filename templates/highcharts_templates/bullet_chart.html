@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static i18n %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Bullet Chart</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/stock/highstock.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        <script src="https://code.highcharts.com/modules/pattern-fill.js"></script>
+        <script src="https://code.highcharts.com/modules/bullet.js"></script>
+    </head>
+    <body>
+    <div id="container" style="height: auto;min-width: 310px; height: 400px; margin: 0 auto" class="border"></div>
+    </body>
+    <script>
+        _categories = {{ years|safe }};
+        _values = {{ gas_production|safe }};
+        _values2 = {{ completion|safe }};
+        Highcharts.setOptions({
+            chart: {
+                inverted: true,
+                marginLeft: 135,
+                type: 'bullet'
+            },
+            title: {
+                text: null
+            },
+            legend: {
+                enabled: false
+            },
+            yAxis: {
+                gridLineWidth: 0
+            },
+            plotOptions: {
+                series: {
+                    pointPadding: 0.25,
+                    borderWidth: 0,
+                    color: '#000',
+                    targetOptions: {
+                        width: '200%'
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            exporting: {
+                enabled: false
+            }
+        });
+
+        Highcharts.chart('container', {
+            chart: {
+                {#marginTop: 40#}
+            },
+            legend: {
+                enabled: false
+            },
+            title: {
+                text: 'Wels Completion(Area Chart)',
+                style: {'color': 'rgb(0,128,128)', 'font-weight': 'bold'}
+            },
+            subtitle: {
+                text: 'US Properties',
+                style: {'color': '#985080', 'font-weight': 'bold'}
+            },
+            credits: {enabled: false},
+            xAxis: {
+                categories: ['<span class="hc-cat-title">Gas Production </span>'],
+                {#crosshair: true#}
+            },
+            yAxis: {
+                plotBands: [
+                    {
+                        from: 0,
+                        to: 50,
+                        color: '#452'
+                    },
+                    {
+                        from: 50,
+                        to: 100,
+                        color: '#558'
+                    },
+                    {
+                        from: 100,
+                        to: 300,
+                        color: '#878'
+                    },
+                ],
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<b>{point.y} </b> (with target at {point.target})',
+                {#footerFormat: '</table>',#}
+                {#shared: true,#}
+                {#useHTML: true#}
+            },
+            series: [{
+                data: [{
+                    y: 275,
+                    target: 289
+                }]
+            }],
+        });
+    </script>
+{% endblock %}

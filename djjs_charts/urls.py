@@ -20,8 +20,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('apps.chartsjs_charts.urls')),
-    path('', include('apps.highcharts.urls')),
+    path('chartjs/', include('apps.chartsjs_charts.urls')),
+    path('highcharts/', include('apps.highcharts.urls')),
     path('', include('apps.tui_charts.urls')),
 ]
 

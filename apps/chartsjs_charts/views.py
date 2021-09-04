@@ -24,7 +24,7 @@ def bar_chart(request):
         'gas_production': bar_group.GasProd.astype(int).to_list(),
         'data': data,
     }
-    return render(request, 'chartjs_templates/bar_chart.html', context)
+    return render(request, 'chartjs_templates/bar_line_chart.html', context)
 
 
 def line_chart(request):
@@ -36,7 +36,7 @@ def line_chart(request):
         'completion': bar_group.Completion.astype(int).to_list(),
         'gas_production': bar_group.GasProd.astype(int).to_list(),
     }
-    return render(request, 'chartjs_templates/line_chart.html', context)
+    return render(request, 'chartjs_templates/area_chart.html', context)
 
 
 def bubble_chart(request):
