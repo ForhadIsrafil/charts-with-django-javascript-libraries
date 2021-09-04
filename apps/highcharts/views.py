@@ -26,6 +26,7 @@ def bar_line_chart(request):
     }
     return render(request, 'highcharts_templates/bar_line_chart.html', context)
 
+
 def area_chart(request):
     '''x='Year', y='Completion', text='Completion'''
     get_csv_data = pd.read_csv(csv_path, )
@@ -41,6 +42,7 @@ def area_chart(request):
     }
     return render(request, 'highcharts_templates/area_chart.html', context)
 
+
 def bullet_chart(request):
     '''x='Year', y='Completion', text='Completion'''
     get_csv_data = pd.read_csv(csv_path, )
@@ -55,4 +57,67 @@ def bullet_chart(request):
         'data': data,
     }
     return render(request, 'highcharts_templates/bullet_chart.html', context)
+
+
+def column_chart(request):
+    '''x='Year', y='Completion', text='Completion'''
+    get_csv_data = pd.read_csv(csv_path, )
+    bar_group = get_csv_data.groupby('Year', as_index=False).sum()
+    bar_group = bar_group.drop('Unnamed: 16', axis=1)
+    # print(json.loads(bar_group.head().to_json(orient='records')))
+    data = bar_group.head().to_json(orient='records')
+    context = {
+        'years': bar_group.Year.astype(int).to_list(),
+        'completion': bar_group.Completion.astype(int).to_list(),
+        'gas_production': bar_group.GasProd.astype(int).to_list(),
+        'data': data,
+    }
+    return render(request, 'highcharts_templates/column_chart.html', context)
+
+
+def dependency_wheel_chart(request):
+    '''x='Year', y='Completion', text='Completion'''
+    get_csv_data = pd.read_csv(csv_path, )
+    bar_group = get_csv_data.groupby('Year', as_index=False).sum()
+    bar_group = bar_group.drop('Unnamed: 16', axis=1)
+    # print(json.loads(bar_group.head().to_json(orient='records')))
+    data = bar_group.head().to_json(orient='records')
+    context = {
+        'years': bar_group.Year.astype(int).to_list(),
+        'completion': bar_group.Completion.astype(int).to_list(),
+        'gas_production': bar_group.GasProd.astype(int).to_list(),
+        'data': data,
+    }
+    return render(request, 'highcharts_templates/dependency_wheel_chart.html', context)
+
+
+def heatmap_chart(request):
+    '''x='Year', y='Completion', text='Completion'''
+    get_csv_data = pd.read_csv(csv_path, )
+    bar_group = get_csv_data.groupby('Year', as_index=False).sum()
+    bar_group = bar_group.drop('Unnamed: 16', axis=1)
+    # print(json.loads(bar_group.head().to_json(orient='records')))
+    data = bar_group.head().to_json(orient='records')
+    context = {
+        'years': bar_group.Year.astype(int).to_list(),
+        'completion': bar_group.Completion.astype(int).to_list(),
+        'gas_production': bar_group.GasProd.astype(int).to_list(),
+        'data': data,
+    }
+    return render(request, 'highcharts_templates/heatmap_chart.html', context)
+
+def pie_chart(request):
+    '''x='Year', y='Completion', text='Completion'''
+    get_csv_data = pd.read_csv(csv_path, )
+    bar_group = get_csv_data.groupby('Year', as_index=False).sum()
+    bar_group = bar_group.drop('Unnamed: 16', axis=1)
+    # print(json.loads(bar_group.head().to_json(orient='records')))
+    data = bar_group.head().to_json(orient='records')
+    context = {
+        'years': bar_group.Year.astype(int).to_list(),
+        'completion': bar_group.Completion.astype(int).to_list(),
+        'gas_production': bar_group.GasProd.astype(int).to_list(),
+        'data': data,
+    }
+    return render(request, 'highcharts_templates/pie_chart.html', context)
 
