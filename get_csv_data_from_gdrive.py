@@ -27,7 +27,7 @@ while pageToken is not None:
 
 print(items)
 
-file_id = '1H_PCR5zjAViYLfBDJsMACDgDmZBBTuhM'
+file_id = '1mBysFNU1MfOsjnsh9qqW6o_GEww1jApR'
 request = service.files().get_media(fileId=file_id)
 
 fh = io.BytesIO()
@@ -35,10 +35,9 @@ downloader = MediaIoBaseDownload(fh, request)
 done = False
 while done is False:
     status, done = downloader.next_chunk()
-    print(status, done)
     print("Download %d%%." % int(status.progress() * 100))
 
-with open('haha.jpg', 'wb') as img_file:
+with open('haha.csv', 'wb') as img_file:
     img_file.write(fh.getbuffer())
 # pattern 1 end
 
